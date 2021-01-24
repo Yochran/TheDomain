@@ -1,0 +1,15 @@
+name: KitCore
+version: ${project.version}
+main: me.yochran.kitcore.KitCore
+api-version: 1.16
+authors: [ Yochran ]
+description: The kitpvp core for the domain.
+commands:
+  Kit:
+    description: Select a kit through a GUI.
+    usage: /<command>
+    aliases: [kits, kitselector, k]
+  KitShop:
+    description: Open the GUI of the kit shop to buy kits.
+    usage: /<command>
+    aliases: [ks]
