@@ -1,0 +1,8 @@
+# Hub Core v1.0 by Yochran
+# https://github.com/Yochran
+
+HubServers:
+  - hub-1
+  - hub-2
+
+GiveItemsOnJoin: true

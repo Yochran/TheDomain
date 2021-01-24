@@ -1,0 +1,11 @@
+name: HubCore
+version: ${project.version}
+main: me.yochran.hubcore.HubCore
+api-version: 1.16
+authors: [ Yochran ]
+description: A server core for the domain.
+commands:
+  HubCore:
+    description: Get the information for the plugin.
+    usage: /<command>
+    aliases: [hub-core]
