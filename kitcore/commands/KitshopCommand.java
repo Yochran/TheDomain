@@ -2,6 +2,7 @@ package me.yochran.kitcore.commands;
 
 import me.yochran.kitcore.KitCore;
 import me.yochran.kitcore.utils.Console;
+import me.yochran.kitcore.utils.KitPvP;
 import me.yochran.kitcore.utils.Utils;
 import me.yochran.kitcore.utils.XMaterial;
 import org.bukkit.Bukkit;
@@ -38,6 +39,21 @@ public class KitshopCommand implements CommandExecutor {
                 gui.setItem(i, filler);
             }
 
+            ItemStack rogue = XMaterial.SUGAR.parseItem();
+            ItemMeta rogueMeta = rogue.getItemMeta();
+            if (!plugin.data.config.getBoolean(player.getUniqueId().toString() + ".Rogue")) {
+                rogueMeta.setDisplayName(Utils.translate("&8Rogue &7($3500)"));
+            } else {
+                rogueMeta.setDisplayName(Utils.translate("&8Rogue &7(&2Owned&7)"));
+            }
+            List<String> rogueLore = new ArrayList<>();
+            rogueLore.add(Utils.translate("&7Get permanent speed 2"));
+            rogueLore.add(Utils.translate("&7and chain armor."));
+            rogueMeta.setLore(rogueLore);
+            rogue.setItemMeta(rogueMeta);
+
+            gui.setItem(0, rogue);
+
             ItemStack fisherman = XMaterial.FISHING_ROD.parseItem();
             ItemMeta fishermanMeta = fisherman.getItemMeta();
             if (!plugin.data.config.getBoolean(player.getUniqueId().toString() + ".Fisherman")) {
@@ -51,7 +67,7 @@ public class KitshopCommand implements CommandExecutor {
             fishermanMeta.setLore(fishermanLore);
             fisherman.setItemMeta(fishermanMeta);
 
-            gui.setItem(0, fisherman);
+            gui.setItem(1, fisherman);
 
             ItemStack enderman = XMaterial.ENDER_PEARL.parseItem();
             ItemMeta endermanMeta = enderman.getItemMeta();
@@ -66,7 +82,7 @@ public class KitshopCommand implements CommandExecutor {
             endermanMeta.setLore(endermenLore);
             enderman.setItemMeta(endermanMeta);
 
-            gui.setItem(1, enderman);
+            gui.setItem(2, enderman);
 
             player.openInventory(gui);
         }

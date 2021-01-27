@@ -72,7 +72,7 @@ public class KitCommand implements CommandExecutor {
                 pvpMeta.setLore(warning);
                 pvp.setItemMeta(pvpMeta);
 
-                gui.setItem(13, pvp);
+                gui.setItem(10, pvp);
 
                 ItemStack fisherman = XMaterial.FISHING_ROD.parseItem();
                 ItemMeta fishermanMeta = fisherman.getItemMeta();
@@ -84,7 +84,7 @@ public class KitCommand implements CommandExecutor {
                 fishermanMeta.setLore(warning);
                 fisherman.setItemMeta(fishermanMeta);
 
-                gui.setItem(12, fisherman);
+                gui.setItem(13, fisherman);
 
                 ItemStack enderman = XMaterial.ENDER_PEARL.parseItem();
                 ItemMeta endermanMeta = enderman.getItemMeta();
@@ -97,6 +97,26 @@ public class KitCommand implements CommandExecutor {
                 enderman.setItemMeta(endermanMeta);
 
                 gui.setItem(14, enderman);
+
+                ItemStack archer = XMaterial.BOW.parseItem();
+                ItemMeta archerMeta = archer.getItemMeta();
+                archerMeta.setDisplayName(Utils.translate("&dArcher &7(&2Owned&7)"));
+                archerMeta.setLore(warning);
+                archer.setItemMeta(archerMeta);
+
+                gui.setItem(11, archer);
+
+                ItemStack rogue = XMaterial.SUGAR.parseItem();
+                ItemMeta rogueMeta = rogue.getItemMeta();
+                if (!plugin.data.config.getBoolean(player.getUniqueId().toString() + ".Rogue")) {
+                    rogueMeta.setDisplayName(Utils.translate("&8Rogue &7(&4Not Owned&7)"));
+                } else {
+                    rogueMeta.setDisplayName(Utils.translate("&8Rogue &7(&2Owned&7)"));
+                }
+                rogueMeta.setLore(warning);
+                rogue.setItemMeta(rogueMeta);
+
+                gui.setItem(12, rogue);
 
                 player.openInventory(gui);
             }

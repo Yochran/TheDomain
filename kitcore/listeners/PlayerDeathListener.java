@@ -18,6 +18,8 @@ public class PlayerDeathListener implements Listener {
         plugin = KitCore.getPlugin(KitCore.class);
     }
 
+    KitPvP kitpvp = new KitPvP();
+
     @EventHandler
     public void onKill(EntityDeathEvent event) {
         Entity entity = event.getEntity().getKiller();
@@ -35,5 +37,6 @@ public class PlayerDeathListener implements Listener {
     public void onDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
         plugin.endermanKit.remove(player.getUniqueId());
+        kitpvp.removeCombat(player);
     }
 }

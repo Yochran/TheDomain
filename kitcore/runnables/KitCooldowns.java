@@ -39,6 +39,22 @@ public class KitCooldowns extends BukkitRunnable {
                     plugin.endermanCooldown.put(onlinePlayers.getUniqueId(), plugin.endermanCooldown.get(onlinePlayers.getUniqueId()) - 1);
                 }
             }
+
+            if (plugin.archerCooldown.containsKey(onlinePlayers.getUniqueId())) {
+                if (plugin.archerCooldown.get(onlinePlayers.getUniqueId()) <= 0) {
+                    plugin.archerCooldown.remove(onlinePlayers.getUniqueId());
+                } else {
+                    plugin.archerCooldown.put(onlinePlayers.getUniqueId(), plugin.archerCooldown.get(onlinePlayers.getUniqueId()) - 1);
+                }
+            }
+
+            if (plugin.rogueCooldown.containsKey(onlinePlayers.getUniqueId())) {
+                if (plugin.rogueCooldown.get(onlinePlayers.getUniqueId()) <= 0) {
+                    plugin.rogueCooldown.remove(onlinePlayers.getUniqueId());
+                } else {
+                    plugin.rogueCooldown.put(onlinePlayers.getUniqueId(), plugin.rogueCooldown.get(onlinePlayers.getUniqueId()) - 1);
+                }
+            }
         }
     }
 }

@@ -20,6 +20,7 @@ public class PlayerJoinListener implements Listener {
         if (!plugin.data.config.contains(player.getUniqueId().toString())) {
             plugin.data.config.set(player.getUniqueId().toString() + ".Fisherman", false);
             plugin.data.config.set(player.getUniqueId().toString() + ".Enderman", false);
+            plugin.data.config.set(player.getUniqueId().toString() + ".Rogue", false);
             plugin.data.saveData();
         }
     }

@@ -1,11 +1,11 @@
 package me.yochran.kitcore;
 
-import me.yochran.kitcore.commands.KitCommand;
-import me.yochran.kitcore.commands.KitshopCommand;
+import me.yochran.kitcore.commands.*;
 import me.yochran.kitcore.data.PlayerData;
 import me.yochran.kitcore.listeners.*;
 import me.yochran.kitcore.listeners.abilities.EndermanAbility;
 import me.yochran.kitcore.listeners.abilities.specialitems.WindStaffAbility;
+import me.yochran.kitcore.runnables.CombatLogRunnable;
 import me.yochran.kitcore.runnables.KitCooldowns;
 import me.yochran.kitcore.runnables.PearlCooldown;
 import me.yochran.kitcore.runnables.WindStaffCooldown;
@@ -24,6 +24,7 @@ public final class KitCore extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        saveDefaultConfig();
         registerData();
         registerCommands();
         registerListeners();
@@ -42,7 +43,14 @@ public final class KitCore extends JavaPlugin {
     public HashMap<UUID, Integer> pvpCooldown = new HashMap<>();
     public HashMap<UUID, Integer> fishermanCooldown = new HashMap<>();
     public HashMap<UUID, Integer> endermanCooldown = new HashMap<>();
+    public HashMap<UUID, Integer> archerCooldown = new HashMap<>();
+    public HashMap<UUID, Integer> rogueCooldown = new HashMap<>();
+
     public HashMap<UUID, Integer> pearlCooldown = new HashMap<>();
+
+    public HashMap<UUID, Integer> combat = new HashMap<>();
+    public HashMap<UUID, UUID> combatDuo = new HashMap<>();
+    public ArrayList<UUID> combatLogged = new ArrayList<>();
 
     public ArrayList<UUID> endermanKit = new ArrayList<>();
 
@@ -59,6 +67,10 @@ public final class KitCore extends JavaPlugin {
     protected void registerCommands() {
         getCommand("Kit").setExecutor(new KitCommand());
         getCommand("KitShop").setExecutor(new KitshopCommand());
+        getCommand("ClearKit").setExecutor(new ClearKitCommand());
+        getCommand("CombatTag").setExecutor(new CombatTagCommand());
+        getCommand("Untag").setExecutor(new UntagCommand());
+        getCommand("Settag").setExecutor(new SetTagCommand());
     }
 
     protected void registerListeners() {
@@ -70,12 +82,17 @@ public final class KitCore extends JavaPlugin {
         manager.registerEvents(new EnderpearlThrowListener(), this);
         manager.registerEvents(new PlayerJoinListener(), this);
         manager.registerEvents(new WindStaffAbility(), this);
+        manager.registerEvents(new PlayerAttackListener(), this);
+        manager.registerEvents(new PlayerLogoutListener(), this);
+        manager.registerEvents(new WorldChangeListener(), this);
+        manager.registerEvents(new CommandListener(), this);
     }
 
     protected void runRunnables() {
         new KitCooldowns().runTaskTimer(this, 0, 20);
         new PearlCooldown().runTaskTimer(this, 0, 20);
         new WindStaffCooldown().runTaskTimer(this, 0, 20);
+        new CombatLogRunnable().runTaskTimer(this, 0, 20);
     }
 
     protected void registerData() {

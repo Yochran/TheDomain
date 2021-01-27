@@ -38,6 +38,10 @@ public class GuiClickListeners implements Listener {
                         kits.fishermanKit(player);
                     } else if (event.getCurrentItem().getType() == XMaterial.ENDER_PEARL.parseMaterial()) {
                         kits.endermanKit(player);
+                    } else if (event.getCurrentItem().getType() == XMaterial.BOW.parseMaterial()) {
+                        kits.archerKit(player);
+                    } else if (event.getCurrentItem().getType() == XMaterial.SUGAR.parseMaterial()) {
+                        kits.rogueKit(player);
                     }
                 }
             }
@@ -81,6 +85,25 @@ public class GuiClickListeners implements Listener {
                                 Utils.sendMessage(player, "&aYou have bought the &5Enderman &akit.");
                                 economy.removeMoney("kitpvp", player, 6500.0);
                                 plugin.data.config.set(player.getUniqueId().toString() + ".Enderman", true);
+                                plugin.data.saveData();
+                            }
+                        }
+                    } else if (event.getCurrentItem().getType() == XMaterial.SUGAR.parseMaterial()) {
+                        if (plugin.data.config.getBoolean(player.getUniqueId().toString() + ".Rogue")) {
+                            event.setCancelled(true);
+                            player.closeInventory();
+                            Utils.sendMessage(player, "&cYou already own this kit.");
+                        } else {
+                            if (basic.economy.config.getDouble(player.getUniqueId().toString() + ".kitpvp.Balance") < 3500.0) {
+                                event.setCancelled(true);
+                                player.closeInventory();
+                                Utils.sendMessage(player, "&cYou don't have enough money to buy this kit.");
+                            } else {
+                                event.setCancelled(true);
+                                player.closeInventory();
+                                Utils.sendMessage(player, "&aYou have bought the &8Rogue &akit.");
+                                economy.removeMoney("kitpvp", player, 3500.0);
+                                plugin.data.config.set(player.getUniqueId().toString() + ".Rogue", true);
                                 plugin.data.saveData();
                             }
                         }
