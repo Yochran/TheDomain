@@ -8,8 +8,20 @@ commands:
   Kit:
     description: Select a kit through a GUI.
     usage: /<command>
-    aliases: [kits, kitselector, k]
   KitShop:
     description: Open the GUI of the kit shop to buy kits.
     usage: /<command>
-    aliases: [ks]
+  ClearKit:
+    description: Clears your kit and inventory.
+    usage: /<command>
+  CombatTag:
+    description: Get your combat tag time.
+    usage: /<command>
+    aliases: [ct, tag]
+  Untag:
+    description: Remove a users combat tag.
+    usage: /<command>
+    aliases: [uncombattag, uct, rct, removecombat, removecombattag]
+  Settag:
+    description: Set a players combat tag.
+    usage: /<command>
