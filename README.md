@@ -12,3 +12,7 @@ KitCore is also exactly what it sounds. A kitpvp core that is nowhere near done.
 ###Commands:
   - /kit (kit selector GUI)
   - /kitshop (shop for kits)
+  - /clearkit
+  - /tag
+  - /settag <player>
+  - /untag <player>
